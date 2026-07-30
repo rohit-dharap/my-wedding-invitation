@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="mr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>रोहित आणि चैताली | लग्न आमंत्रण</title>
+    <meta
+      name="description"
+      content="रोहित धारप आणि चैताली राव यांच्या लग्नाचे खेळकर, मराठी डिजिटल आमंत्रण."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <main>
+        <section class="comic section" id="comic">
+          <div class="comic-stage" id="comic-stage">
+            <div class="comic-stage__texture" aria-hidden="true"></div>
+            <div class="floral-corner floral-corner--left" aria-hidden="true">
+              <span class="floral-corner__flower floral-corner__flower--large"></span>
+              <span class="floral-corner__flower floral-corner__flower--small"></span>
+              <span class="floral-corner__leaf floral-corner__leaf--one"></span>
+              <span class="floral-corner__leaf floral-corner__leaf--two"></span>
+            </div>
+            <div class="floral-corner floral-corner--right" aria-hidden="true">
+              <span class="floral-corner__flower floral-corner__flower--large"></span>
+              <span class="floral-corner__flower floral-corner__flower--small"></span>
+              <span class="floral-corner__leaf floral-corner__leaf--one"></span>
+              <span class="floral-corner__leaf floral-corner__leaf--two"></span>
+            </div>
+
+            <div class="conversation-scene">
+              <div class="dialogue-panel" id="dialogue-panel">
+                <div class="dialogue-panel__comic">
+                  <div class="dialogue-panel__spark dialogue-panel__spark--left" aria-hidden="true"></div>
+                  <div class="dialogue-panel__spark dialogue-panel__spark--right" aria-hidden="true"></div>
+                  <div class="speech-bubble speech-bubble--left" id="speech-bubble">
+                    <div class="dialogue-panel__speaker" id="dialogue-speaker">छोटू</div>
+                    <p class="dialogue-panel__line" id="dialogue-line"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="duo">
+                <figure class="character character--chotu is-speaking" id="character-chotu">
+                  <div class="character__frame character__frame--cat">
+                    <img src="./assets/Chotu.png" alt="छोटू" class="character__image character__image--cat" />
+                  </div>
+                  <figcaption>छोटू</figcaption>
+                </figure>
+
+                <figure class="character character--bappa is-listening" id="character-bappa">
+                  <div class="character__frame character__frame--bappa">
+                    <img src="./assets/bappa-reference.png" alt="बाप्पा" class="character__image character__image--bappa" />
+                  </div>
+                  <figcaption>बाप्पा</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="memory-screen" id="memory-screen" aria-live="polite">
+              <div class="memory-screen__glow"></div>
+              <div class="memory-screen__card" id="memory-card">
+                <div class="memory-screen__image" id="memory-image">
+                  <span class="memory-screen__placeholder" id="memory-placeholder">
+                    रोहितचा फोटो इथे दिसेल
+                  </span>
+                </div>
+                <div class="memory-screen__copy">
+                  <span class="memory-screen__tag" id="memory-tag">आता गुपित उलगडतंय</span>
+                  <h1 id="memory-title">रोहित</h1>
+                  <p id="memory-caption">इथे तुमचा फोटो फ्लॅश होईल.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comic__footer">
+            <button
+              class="button button--primary"
+              id="replay-button"
+              type="button"
+              aria-hidden="true"
+              tabindex="-1"
+            >
+              ↻ पुन्हा पाहा
+            </button>
+          </div>
+        </section>
+
+        <section class="invitees section section--deferred" id="invitees">
+          <div class="section__heading section__heading--invitees">
+            <p class="eyebrow">🌺 निमंत्रक</p>
+            <div class="invitees-heading__title">
+              <img
+                src="./assets/web/namaskaram.webp"
+                alt=""
+                class="invitees-heading__namaskaram"
+                aria-hidden="true"
+              />
+              <h2>आशीर्वाद द्यायला नक्की या</h2>
+              <img
+                src="./assets/web/namaskaram.webp"
+                alt=""
+                class="invitees-heading__namaskaram"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+
+          <div class="invitees__stage">
+            <button
+              class="invitees__arrow invitees__arrow--previous"
+              id="previous-invitee"
+              type="button"
+              aria-label="मागील निमंत्रक पाहा"
+            >
+              ‹
+            </button>
+            <div
+              class="invitees__list"
+              id="invitees-list"
+              aria-live="polite"
+              aria-label="निमंत्रक पाहण्यासाठी डावीकडे किंवा उजवीकडे स्वाइप करा"
+            >
+              <article class="invitee-card" data-person="vikas">
+                <div class="invitee-card__portrait" aria-label="विकास धारप यांचा फोटो">
+                  <picture>
+                    <source srcset="./assets/web/father.webp" type="image/webp" />
+                    <img src="./assets/web/father.png" alt="विकास धारप नमस्कार करताना" loading="lazy" />
+                  </picture>
+                </div>
+                <span class="invitee-card__role">🙏 वडील</span>
+                <h3>विकास धारप</h3>
+                <p>आपल्या उपस्थितीने हा आनंदसोहळा अधिक मंगलमय होईल.</p>
+              </article>
+              <article class="invitee-card" data-person="chaitali-dharap">
+                <div class="invitee-card__portrait" aria-label="चैताली धारप यांचा फोटो">
+                  <picture>
+                    <source srcset="./assets/web/mother.webp" type="image/webp" />
+                    <img src="./assets/web/mother.png" alt="चैताली धारप नमस्कार करताना" loading="lazy" />
+                  </picture>
+                </div>
+                <span class="invitee-card__role">🌼 आई</span>
+                <h3>चैताली धारप</h3>
+                <p>मायेच्या आणि आनंदाच्या या क्षणी आपले मनापासून स्वागत.</p>
+              </article>
+              <article class="invitee-card" data-person="dharap-parivar">
+                <div
+                  class="invitee-card__portrait invitee-card__portrait--family"
+                  aria-label="धारप परिवाराचा फोटो"
+                >
+                  <img
+                    src="./assets/web/dharap-family.webp"
+                    alt="समस्त धारप परिवार"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="invitee-card__role">🪔 आपले निमंत्रक</span>
+                <h3>समस्त धारप परिवार</h3>
+                <p>आमच्या संपूर्ण परिवारातर्फे आपले मनःपूर्वक स्वागत.</p>
+              </article>
+              <article class="invitee-card" data-person="dharap-pets">
+                <div
+                  class="invitee-card__portrait invitee-card__portrait--pets"
+                  aria-label="धारप परिवारातील पाच मांजरी"
+                >
+                  <figure class="pet-tile">
+                    <img src="./assets/web/jerry.webp" alt="जेरी" loading="lazy" />
+                    <figcaption>जेरी</figcaption>
+                  </figure>
+                  <figure class="pet-tile">
+                    <img src="./assets/web/milli.webp" alt="मिली" loading="lazy" />
+                    <figcaption>मिली</figcaption>
+                  </figure>
+                  <figure class="pet-tile">
+                    <img src="./assets/web/kittu.webp" alt="किट्टू" loading="lazy" />
+                    <figcaption>किट्टू</figcaption>
+                  </figure>
+                  <figure class="pet-tile">
+                    <img src="./assets/web/mika.webp" alt="मिका" loading="lazy" />
+                    <figcaption>मिका</figcaption>
+                  </figure>
+                  <figure class="pet-tile">
+                    <img src="./assets/web/chhotu.webp" alt="छोटू" loading="lazy" />
+                    <figcaption>छोटू</figcaption>
+                  </figure>
+                </div>
+                <span class="invitee-card__role">🐾 आमचे लाडके</span>
+                <h3>धारप परिवारातील पाळीव सदस्य</h3>
+                <p>जेरी, मिली, किट्टू, मिका आणि छोटूतर्फेही प्रेमळ आमंत्रण.</p>
+              </article>
+            </div>
+            <button
+              class="invitees__arrow invitees__arrow--next"
+              id="next-invitee"
+              type="button"
+              aria-label="पुढील निमंत्रक पाहा"
+            >
+              ›
+            </button>
+          </div>
+        </section>
+
+        <section class="details section section--deferred" id="details">
+          <div class="section__heading">
+            <p class="eyebrow">🪷 लग्नसोहळ्याचे ठिकाण</p>
+            <h2>गोड बातमी ऐकली, आता येण्याचे नक्की करा</h2>
+          </div>
+
+          <div class="details__grid">
+            <article class="info-card info-card--venue">
+              <div class="venue-symbols" aria-hidden="true">
+                <img src="./assets/web/kalash.webp" alt="" />
+                <span class="venue-symbols__line"></span>
+                <img src="./assets/web/havankund.webp" alt="" />
+              </div>
+              <h3>
+                <a
+                  class="venue-title-link"
+                  href="https://delabanquet.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Dela Banquet <span aria-hidden="true">↗</span>
+                </a>
+              </h3>
+              <p>🗓️ १६ एप्रिल २०२७ रोजी, आपल्या सगळ्यांच्या प्रेमळ उपस्थितीत.</p>
+              <address class="info-card__address">
+                डेला बँक्वेट, दुसरा मजला, टाटा क्रोमा स्टोअरच्या वर,
+                प्लॅटिनम पॅराडाईज, सागाव, मानपाडा रोड, डी-मार्टजवळ,
+                डोंबिवली पूर्व.
+              </address>
+              <div class="info-card__actions">
+                <a
+                  class="button button--primary button--map"
+                  href="https://maps.app.goo.gl/UKPySPcJBmjrajha8"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span class="button--map__icon" aria-hidden="true">📍</span>
+                  गूगल मॅपवर उघडा
+                </a>
+              </div>
+            </article>
+
+            <article class="info-card">
+              <span class="info-card__label">💞 पुढचा भाग</span>
+              <h3>📖 आमची गोष्ट</h3>
+              <p>
+                पुढच्या फेरीत इथे तुमची प्रेमकथा, फोटो टाइमलाइन आणि छोट्या
+                आठवणी आपण टाकू.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
