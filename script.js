@@ -13,24 +13,25 @@ const dialogueSequence = [
   },
   {
     speaker: "छोटू",
-    line: "तुला माहितीये का, एक सीक्रेट आहे.",
+    line: "तुला माहितीये का, एक सीक्रेट आहे 🤭",
     hint: "आता गुपित उलगडायला सुरुवात होते.",
     scene: null
   },
   {
     speaker: "बाप्पा",
-    line: "काय?",
+    line: "काय 🤔",
     hint: "बाप्पाही उत्सुक झाले.",
     scene: null
   },
   {
     speaker: "छोटू",
-    line: "आमच्या रोहितचं लग्न ठरलं आहे.",
+    line: "आमच्या रोहितचं लग्न ठरलं आहे 🥳",
     hint: "आता खाली रोहितचा फोटो फ्लॅश होईल.",
+    revealWeddingDecor: true,
     layout: "solo-reveal",
     scene: {
-      tag: "पहिली बातमी",
-      title: "रोहित",
+      tag: "",
+      title: "चि. रोहित",
       caption: "हा आहे आपला नवरदेव रोहित.",
       placeholder: "",
       image: "./assets/web/rohit.jpg",
@@ -48,12 +49,12 @@ const dialogueSequence = [
   },
   {
     speaker: "छोटू",
-    line: "रावांच्या चैतालीशी!",
+    line: "रावांच्या चैतालीशी 🥰",
     hint: "आता रोहितच्या जागी चैतालीचा फोटो येईल.",
     layout: "solo-reveal",
     scene: {
-      tag: "दुसरी बातमी",
-      title: "चैताली",
+      tag: "",
+      title: "चि.सौं.का. चैताली",
       caption: "आणि ही आहे आपली नवरी चैताली.",
       placeholder: "",
       image: "./assets/web/chaitali.jpg",
@@ -63,9 +64,10 @@ const dialogueSequence = [
   },
   {
     speaker: "बाप्पा",
-    line: "वा! फारच छान बातमी आहे. माझा आशीर्वाद त्यांच्या पाठीशी आहे.",
+    line: "वा! फारच छान बातमी आहे. माझा आशीर्वाद त्यांच्या पाठीशी आहे ✋",
     hint: "आता दोघांचा एकत्र फोटो दिसेल.",
     layout: "bappa-blessing",
+    duration: 4400,
     scene: {
       tag: "आशीर्वाद",
       title: "रोहित आणि चैताली",
@@ -80,13 +82,19 @@ const dialogueSequence = [
     speaker: "बाप्पा",
     line: "मी तर ह्यांना आशीर्वाद दिलाय. आता तुम्ही सुद्धा द्यायला आवर्जून या",
     hint: "आता खाली घरच्यांची ओळख एकामागून एक दिसेल.",
-    layout: "bappa-blessing",
-    keepScene: true,
+    layout: "bappa-focus",
     scene: null
   }
 ];
 
-const inviteeOrder = ["vikas", "chaitali-dharap", "dharap-parivar", "dharap-pets"];
+const inviteeOrder = [
+  "vikas",
+  "chaitali-dharap",
+  "neha-kaustubh",
+  "kaku-dada-vahini",
+  "dharap-pets",
+  "anya"
+];
 const inviteeDisplayDuration = 2700;
 const dialogueStepDuration = 3400;
 const dialogueEndingDelay = 2200;
@@ -166,18 +174,28 @@ function setDialogueStep(step) {
 
   const isChotuSpeaking = step.speaker === "छोटू";
   const isBappaBlessing = step.layout === "bappa-blessing";
+  const isBappaFocus = step.layout === "bappa-focus";
   const isSoloReveal = step.layout === "solo-reveal";
 
   dialogueSpeaker.textContent = step.speaker;
   dialogueLine.textContent = step.line;
   comicStage.classList.toggle("is-bappa-blessing", isBappaBlessing);
+  comicStage.classList.toggle("is-bappa-focus", isBappaFocus);
   comicStage.classList.toggle("is-solo-reveal", isSoloReveal);
+  if (step.revealWeddingDecor) {
+    comicStage.classList.add("is-wedding-revealed");
+  }
+  memoryScreen?.toggleAttribute("hidden", isBappaFocus);
   speechBubble.classList.toggle("speech-bubble--left", isChotuSpeaking);
   speechBubble.classList.toggle("speech-bubble--right", !isChotuSpeaking);
   chotuCharacter.classList.toggle("is-speaking", isChotuSpeaking);
   chotuCharacter.classList.toggle("is-listening", !isChotuSpeaking);
   bappaCharacter.classList.toggle("is-speaking", !isChotuSpeaking);
   bappaCharacter.classList.toggle("is-listening", isChotuSpeaking);
+
+  if (isBappaFocus) {
+    hideMemoryScene();
+  }
 }
 
 function hideMemoryScene() {
@@ -312,11 +330,11 @@ function handleVisibilityChange() {
   }
 }
 
-function revealAndScrollTo(section) {
+function revealAndScrollTo(section, block = "center") {
   section.classList.add("is-revealed");
   timeouts.push(
     window.setTimeout(() => {
-      section.scrollIntoView({ behavior: "smooth", block: "center" });
+      section.scrollIntoView({ behavior: "smooth", block });
     }, sectionRevealDuration)
   );
 }
@@ -387,7 +405,9 @@ function advanceConversation() {
   currentDialogueIndex += 1;
   scheduleConversationAction(
     currentDialogueIndex >= dialogueSequence.length ? finishConversation : advanceConversation,
-    currentDialogueIndex >= dialogueSequence.length ? dialogueEndingDelay : dialogueStepDuration
+    currentDialogueIndex >= dialogueSequence.length
+      ? dialogueEndingDelay
+      : (step.duration ?? dialogueStepDuration)
   );
 }
 
@@ -436,7 +456,7 @@ function playInviteesSequence() {
     timeouts.push(
       window.setTimeout(() => {
         showReplayButton();
-        revealAndScrollTo(detailsSection);
+        revealAndScrollTo(detailsSection, "start");
       }, inviteeOrder.length * inviteeDisplayDuration + 1800)
     );
   }
@@ -445,7 +465,9 @@ function playInviteesSequence() {
 function playConversation() {
   clearTimeline();
   comicStage?.classList.remove("is-bappa-blessing");
+  comicStage?.classList.remove("is-bappa-focus");
   comicStage?.classList.remove("is-solo-reveal");
+  comicStage?.classList.remove("is-wedding-revealed");
   hideReplayButton();
   hideDialogueResumeButton();
   hideMemoryScene();

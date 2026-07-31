@@ -2,11 +2,12 @@
 <html lang="mr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#3d0714" />
     <title>रोहित आणि चैताली | लग्न आमंत्रण</title>
     <meta
       name="description"
-      content="रोहित धारप आणि चैताली राव यांच्या लग्नाचे खेळकर, मराठी डिजिटल आमंत्रण."
+      content="रोहित धारप आणि चैताली राव यांच्या मंगल विवाहाचे पारंपरिक मराठी डिजिटल आमंत्रण."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=23" />
   </head>
   <body class="force-mweb">
     <div class="page-shell">
@@ -31,17 +32,14 @@
               संवाद पुढे नेण्यासाठी परत क्लिक करा
             </button>
             <div class="comic-stage__texture" aria-hidden="true"></div>
-            <div class="floral-corner floral-corner--left" aria-hidden="true">
-              <span class="floral-corner__flower floral-corner__flower--large"></span>
-              <span class="floral-corner__flower floral-corner__flower--small"></span>
-              <span class="floral-corner__leaf floral-corner__leaf--one"></span>
-              <span class="floral-corner__leaf floral-corner__leaf--two"></span>
+            <div class="wedding-ornament" aria-hidden="true">
+              <img class="wedding-ornament__garland" src="./assets/wedding-u-garland-v4.webp" alt="" />
+              <img class="wedding-music-icon wedding-music-icon--left" src="./assets/wedding-music-icon-v4.webp" alt="" />
+              <img class="wedding-music-icon wedding-music-icon--right" src="./assets/wedding-music-icon-v4.webp" alt="" />
             </div>
-            <div class="floral-corner floral-corner--right" aria-hidden="true">
-              <span class="floral-corner__flower floral-corner__flower--large"></span>
-              <span class="floral-corner__flower floral-corner__flower--small"></span>
-              <span class="floral-corner__leaf floral-corner__leaf--one"></span>
-              <span class="floral-corner__leaf floral-corner__leaf--two"></span>
+            <div class="wedding-side-garlands" aria-hidden="true">
+              <span class="wedding-side-garland wedding-side-garland--left"></span>
+              <span class="wedding-side-garland wedding-side-garland--right"></span>
             </div>
 
             <div class="conversation-scene">
@@ -104,8 +102,26 @@
         </section>
 
         <section class="invitees section section--deferred" id="invitees">
+          <div class="wedding-ornament wedding-ornament--section" aria-hidden="true">
+            <img class="wedding-ornament__garland" src="./assets/wedding-u-garland-v4.webp" alt="" loading="lazy" />
+            <img class="wedding-music-icon wedding-music-icon--left" src="./assets/wedding-music-icon-v4.webp" alt="" loading="lazy" />
+            <img class="wedding-music-icon wedding-music-icon--right" src="./assets/wedding-music-icon-v4.webp" alt="" loading="lazy" />
+          </div>
+          <div class="wedding-side-garlands" aria-hidden="true">
+            <span class="wedding-side-garland wedding-side-garland--left"></span>
+            <span class="wedding-side-garland wedding-side-garland--right"></span>
+          </div>
           <div class="section__heading section__heading--invitees">
-            <p class="eyebrow">🌺 निमंत्रक</p>
+            <div class="deity-blessings" aria-label="कुलदैवतांचे आशीर्वाद">
+              <figure class="deity-blessing">
+                <img src="./assets/vyadeshwar-dev.webp" alt="श्री व्याडेश्वर देव" loading="lazy" />
+                <figcaption>|| श्री कुलदेव व्याडेश्वर प्रसन्न ||</figcaption>
+              </figure>
+              <figure class="deity-blessing">
+                <img src="./assets/yogeshwari-devi.webp" alt="श्री कुलस्वामिनी योगेश्वरी देवी" loading="lazy" />
+                <figcaption>|| श्री कुलस्वामिनी योगेश्वरी प्रसन्न ||</figcaption>
+              </figure>
+            </div>
             <div class="invitees-heading__title">
               <img
                 src="./assets/web/namaskaram.webp"
@@ -147,7 +163,7 @@
                 </div>
                 <span class="invitee-card__role">🙏 वडील</span>
                 <h3>विकास धारप</h3>
-                <p>आपल्या उपस्थितीने हा आनंदसोहळा अधिक मंगलमय होईल.</p>
+                <p>卐 आपल्या उपस्थितीने हा आनंदसोहळा अधिक मंगलमय होईल.</p>
               </article>
               <article class="invitee-card" data-person="chaitali-dharap">
                 <div class="invitee-card__portrait" aria-label="चैताली धारप यांचा फोटो">
@@ -158,22 +174,37 @@
                 </div>
                 <span class="invitee-card__role">🌼 आई</span>
                 <h3>चैताली धारप</h3>
-                <p>मायेच्या आणि आनंदाच्या या क्षणी आपले मनापासून स्वागत.</p>
+                <p>🙏मायेच्या आणि आनंदाच्या या क्षणी आपले मनापासून स्वागत.</p>
               </article>
-              <article class="invitee-card" data-person="dharap-parivar">
+              <article class="invitee-card" data-person="neha-kaustubh">
                 <div
-                  class="invitee-card__portrait invitee-card__portrait--family"
-                  aria-label="धारप परिवाराचा फोटो"
+                  class="invitee-card__portrait invitee-card__portrait--neha-kaustubh"
+                  aria-label="नेहा आणि कौस्तुभ यांचा फोटो"
                 >
                   <img
-                    src="./assets/web/dharap-family.webp"
-                    alt="समस्त धारप परिवार"
+                    src="./assets/Neha Kaustubh (1).png"
+                    alt="नेहा आणि कौस्तुभ नमस्कार करताना"
                     loading="lazy"
                   />
                 </div>
-                <span class="invitee-card__role">🪔 आपले निमंत्रक</span>
-                <h3>समस्त धारप परिवार</h3>
-                <p>आमच्या संपूर्ण परिवारातर्फे आपले मनःपूर्वक स्वागत.</p>
+                <span class="invitee-card__role">💐 खास निमंत्रण</span>
+                <h3>नेहा आणि कौस्तुभ</h3>
+                <p>💖 लाडाची करवली आणि धारपांचे जावई 🙏</p>
+              </article>
+              <article class="invitee-card" data-person="kaku-dada-vahini">
+                <div
+                  class="invitee-card__portrait invitee-card__portrait--family"
+                  aria-label="काकू, दादा आणि वहिनी यांचा फोटो"
+                >
+                  <img
+                    src="./assets/Kaku_Dada_Vahini.png"
+                    alt="काकू, दादा आणि वहिनी नमस्कार करताना"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="invitee-card__role">🌸 घरच्यांचं प्रेमळ आमंत्रण</span>
+                <h3>काकू, दादा आणि वहिनी</h3>
+                <p>💐आमच्या आनंदात सहभागी व्हायला आणि नवदांपत्याला आशीर्वाद द्यायला नक्की या! 🙏</p>
               </article>
               <article class="invitee-card" data-person="dharap-pets">
                 <div
@@ -193,7 +224,7 @@
                     <figcaption>किट्टू</figcaption>
                   </figure>
                   <figure class="pet-tile">
-                    <img src="./assets/web/mika.webp" alt="मिका" loading="lazy" />
+                    <img src="./assets/Mika22.png" alt="मिका" loading="lazy" />
                     <figcaption>मिका</figcaption>
                   </figure>
                   <figure class="pet-tile">
@@ -202,8 +233,28 @@
                   </figure>
                 </div>
                 <span class="invitee-card__role">🐾 आमचे लाडके</span>
-                <h3>धारप परिवारातील पाळीव सदस्य</h3>
-                <p>जेरी, मिली, किट्टू, मिका आणि छोटूतर्फेही प्रेमळ आमंत्रण.</p>
+                <h3>धारपांचे किलबिल सदस्य</h3>
+                <p>😺जेरी, मिली, किट्टू, मिका आणि छोटूतर्फेही प्रेमळ आमंत्रण 😺</p>
+              </article>
+              <article class="invitee-card" data-person="anya">
+                <div
+                  class="invitee-card__portrait invitee-card__portrait--anya"
+                  aria-label="अन्या आणि तिच्या काकाचे दोन फोटो"
+                >
+                  <figure class="anya-photo anya-photo--with-kaka">
+                    <img src="./assets/Anya-Kaka.png" alt="अन्या तिच्या काकासोबत" loading="lazy" />
+                  </figure>
+                  <figure class="anya-photo anya-photo--solo">
+                    <img
+                      src="./assets/Anya2.png"
+                      alt="नऊवारी नेसून नमस्कार करणारी अन्या"
+                      loading="lazy"
+                    />
+                  </figure>
+                </div>
+                <span class="invitee-card__role">🎉 अन्याचं खास आमंत्रण</span>
+                <h3>अन्या आणि काका</h3>
+                <p>💃 माझ्या काकाच्या लग्नाला यायचं हं! 🥳</p>
               </article>
             </div>
             <button
@@ -218,34 +269,71 @@
         </section>
 
         <section class="details section section--deferred" id="details">
-          <div class="section__heading">
-            <p class="eyebrow">🪷 लग्नसोहळ्याचे ठिकाण</p>
-            <h2>गोड बातमी ऐकली, आता येण्याचे नक्की करा</h2>
+          <div class="wedding-ornament wedding-ornament--section" aria-hidden="true">
+            <img class="wedding-ornament__garland" src="./assets/wedding-u-garland-v4.webp" alt="" loading="lazy" />
+            <img class="wedding-music-icon wedding-music-icon--left" src="./assets/wedding-music-icon-v4.webp" alt="" loading="lazy" />
+            <img class="wedding-music-icon wedding-music-icon--right" src="./assets/wedding-music-icon-v4.webp" alt="" loading="lazy" />
           </div>
+          <div class="wedding-side-garlands" aria-hidden="true">
+            <span class="wedding-side-garland wedding-side-garland--left"></span>
+            <span class="wedding-side-garland wedding-side-garland--right"></span>
+          </div>
+          <div class="details-ceremony-header">
+            <img class="details-ceremony-header__symbol" src="./assets/kalash-v2.webp" alt="" />
+            <div class="section__heading details__heading">
+              <p class="eyebrow">🪷 लग्नसोहळ्याचे ठिकाण</p>
+              <h2>गोड बातमी ऐकली,<br />आता येण्याचे नक्की करा</h2>
+            </div>
+            <img class="details-ceremony-header__symbol" src="./assets/havankund-v2.webp" alt="" />
+          </div>
+
+          <figure class="baraat-banner" aria-label="वरातीचे पारंपरिक चित्र">
+            <img src="./assets/wedding-baraat-banner-v1.webp" alt="घोड्यावरचा नवरदेव आणि पारंपरिक मराठी वरात" />
+          </figure>
 
           <div class="details__grid">
             <article class="info-card info-card--venue">
-              <div class="venue-symbols" aria-hidden="true">
-                <img src="./assets/web/kalash.webp" alt="" />
-                <span class="venue-symbols__line"></span>
-                <img src="./assets/web/havankund.webp" alt="" />
+              <div class="venue-name-row">
+                <img class="venue-name-row__akshada" src="./assets/akshada-hands-v1.webp" alt="" />
+                <h3>
+                  <a
+                    class="venue-title-link"
+                    href="https://delabanquet.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Dela Banquet <span aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <img class="venue-name-row__akshada venue-name-row__akshada--right" src="./assets/akshada-hands-v1.webp" alt="" />
               </div>
-              <h3>
-                <a
-                  class="venue-title-link"
-                  href="https://delabanquet.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Dela Banquet <span aria-hidden="true">↗</span>
-                </a>
-              </h3>
-              <p>🗓️ १६ एप्रिल २०२७ रोजी, आपल्या सगळ्यांच्या प्रेमळ उपस्थितीत.</p>
-              <address class="info-card__address">
-                डेला बँक्वेट, दुसरा मजला, टाटा क्रोमा स्टोअरच्या वर,
-                प्लॅटिनम पॅराडाईज, सागाव, मानपाडा रोड, डी-मार्टजवळ,
-                डोंबिवली पूर्व.
-              </address>
+
+              <div class="venue-facts">
+                <p class="venue-fact">
+                  <span class="venue-fact__emoji" aria-hidden="true">🗓️</span>
+                  <span><strong>दिनांक</strong><small>१६ एप्रिल २०२७</small></span>
+                </p>
+                <p class="venue-fact">
+                  <span class="venue-fact__emoji" aria-hidden="true">🕛</span>
+                  <span><strong>मुहूर्त</strong><small>दुपारी १२ वाजून १२ मिनिटे <em>(तात्पुरता)</em></small></span>
+                </p>
+                <address class="venue-fact venue-fact--address">
+                  <span class="venue-fact__emoji" aria-hidden="true">📍</span>
+                  <span>
+                    <strong>पत्ता</strong>
+                    <small>
+                      डेला बँक्वेट, दुसरा मजला, टाटा क्रोमा स्टोअरच्या वर,
+                      प्लॅटिनम पॅराडाईज, सागाव, मानपाडा रोड, डी-मार्टजवळ,
+                      डोंबिवली पूर्व.
+                    </small>
+                    <small class="venue-parking-tip">
+                      <span aria-hidden="true">🚗</span>
+                      <span>२०–३० गाड्यांसाठी पार्किंगची सोय आहे · व्हॅलेट सेवा उपलब्ध असेल</span>
+                    </small>
+                  </span>
+                </address>
+              </div>
+
               <div class="info-card__actions">
                 <a
                   class="button button--primary button--map"
@@ -253,8 +341,8 @@
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="button--map__icon" aria-hidden="true">📍</span>
-                  गूगल मॅपवर उघडा
+                  <img class="button--map__icon" src="./assets/google-maps-icon-96.png" alt="" />
+                  Google Maps वर दिशा पहा
                 </a>
               </div>
             </article>
@@ -264,6 +352,6 @@
       </main>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="./script.js?v=13"></script>
   </body>
 </html>
