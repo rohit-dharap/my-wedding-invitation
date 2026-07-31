@@ -88,6 +88,8 @@ const dialogueSequence = [
 
 const inviteeOrder = ["vikas", "chaitali-dharap", "dharap-parivar", "dharap-pets"];
 const inviteeDisplayDuration = 2700;
+const dialogueStepDuration = 3400;
+const dialogueEndingDelay = 2200;
 const memorySwapDuration = 240;
 const sectionRevealDuration = 620;
 const sceneImageUrls = dialogueSequence
@@ -113,7 +115,9 @@ const memoryTitle = document.getElementById("memory-title");
 const memoryCaption = document.getElementById("memory-caption");
 const memoryPlaceholder = document.getElementById("memory-placeholder");
 const comicFooter = document.querySelector(".comic__footer");
+const comicSection = document.getElementById("comic");
 const replayButton = document.getElementById("replay-button");
+const dialogueResumeButton = document.getElementById("dialogue-resume-button");
 const inviteeCards = Array.from(document.querySelectorAll(".invitee-card"));
 const inviteesList = document.getElementById("invitees-list");
 const previousInviteeButton = document.getElementById("previous-invitee");
@@ -126,10 +130,26 @@ let activeInviteeIndex = 0;
 let swipeStartX = null;
 let swipeStartY = null;
 let screenWakeLock = null;
+let conversationTimeoutId = null;
+let conversationTimeoutDelay = 0;
+let conversationTimeoutStartedAt = 0;
+let pendingConversationAction = null;
+let remainingConversationDelay = 0;
+let currentDialogueIndex = 0;
+let isConversationPaused = false;
+let isDialoguePauseEnabled = false;
 
 function clearTimeline() {
   timeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
   timeouts = [];
+  if (conversationTimeoutId !== null) {
+    window.clearTimeout(conversationTimeoutId);
+    conversationTimeoutId = null;
+  }
+  conversationTimeoutDelay = 0;
+  conversationTimeoutStartedAt = 0;
+  pendingConversationAction = null;
+  remainingConversationDelay = 0;
 }
 
 function setDialogueStep(step) {
@@ -308,11 +328,92 @@ function hideReplayButton() {
   replayButton?.setAttribute("tabindex", "-1");
 }
 
+function hideDialogueResumeButton() {
+  dialogueResumeButton?.classList.remove("is-visible");
+  dialogueResumeButton?.setAttribute("aria-hidden", "true");
+  dialogueResumeButton?.setAttribute("tabindex", "-1");
+}
+
+function showDialogueResumeButton() {
+  dialogueResumeButton?.classList.add("is-visible");
+  dialogueResumeButton?.setAttribute("aria-hidden", "false");
+  dialogueResumeButton?.removeAttribute("tabindex");
+}
+
 function showReplayButton() {
   comicFooter?.classList.add("is-visible");
   replayButton?.classList.add("is-visible");
   replayButton?.setAttribute("aria-hidden", "false");
   replayButton?.removeAttribute("tabindex");
+}
+
+function scheduleConversationAction(action, delay) {
+  pendingConversationAction = action;
+  conversationTimeoutDelay = delay;
+  conversationTimeoutStartedAt = window.performance.now();
+  conversationTimeoutId = window.setTimeout(() => {
+    conversationTimeoutId = null;
+    conversationTimeoutDelay = 0;
+    conversationTimeoutStartedAt = 0;
+    remainingConversationDelay = 0;
+    const nextAction = pendingConversationAction;
+    pendingConversationAction = null;
+    nextAction?.();
+  }, delay);
+}
+
+function finishConversation() {
+  isDialoguePauseEnabled = false;
+  isConversationPaused = false;
+  hideDialogueResumeButton();
+  playInviteesSequence();
+}
+
+function advanceConversation() {
+  if (currentDialogueIndex >= dialogueSequence.length) {
+    scheduleConversationAction(finishConversation, dialogueEndingDelay);
+    return;
+  }
+
+  const step = dialogueSequence[currentDialogueIndex];
+  setDialogueStep(step);
+
+  if (step.scene) {
+    showMemoryScene(step.scene);
+  } else if (currentDialogueIndex >= 4 && !step.keepScene) {
+    hideMemoryScene();
+  }
+
+  currentDialogueIndex += 1;
+  scheduleConversationAction(
+    currentDialogueIndex >= dialogueSequence.length ? finishConversation : advanceConversation,
+    currentDialogueIndex >= dialogueSequence.length ? dialogueEndingDelay : dialogueStepDuration
+  );
+}
+
+function pauseConversation() {
+  if (!isDialoguePauseEnabled || isConversationPaused || conversationTimeoutId === null) {
+    return;
+  }
+
+  const elapsed = window.performance.now() - conversationTimeoutStartedAt;
+  remainingConversationDelay = Math.max(0, conversationTimeoutDelay - elapsed);
+  window.clearTimeout(conversationTimeoutId);
+  conversationTimeoutId = null;
+  conversationTimeoutDelay = 0;
+  conversationTimeoutStartedAt = 0;
+  isConversationPaused = true;
+  showDialogueResumeButton();
+}
+
+function resumeConversation() {
+  if (!isConversationPaused || !pendingConversationAction) {
+    return;
+  }
+
+  isConversationPaused = false;
+  hideDialogueResumeButton();
+  scheduleConversationAction(pendingConversationAction, remainingConversationDelay);
 }
 
 function playInviteesSequence() {
@@ -346,31 +447,13 @@ function playConversation() {
   comicStage?.classList.remove("is-bappa-blessing");
   comicStage?.classList.remove("is-solo-reveal");
   hideReplayButton();
+  hideDialogueResumeButton();
   hideMemoryScene();
   resetInvitees();
-
-  dialogueSequence.forEach((step, index) => {
-    timeouts.push(
-      window.setTimeout(() => {
-        setDialogueStep(step);
-
-        if (step.scene) {
-          showMemoryScene(step.scene);
-          return;
-        }
-
-        if (index >= 4 && !step.keepScene) {
-          hideMemoryScene();
-        }
-      }, index * 2600)
-    );
-  });
-
-  timeouts.push(
-    window.setTimeout(() => {
-      playInviteesSequence();
-    }, dialogueSequence.length * 2600 + 2000)
-  );
+  currentDialogueIndex = 0;
+  isConversationPaused = false;
+  isDialoguePauseEnabled = true;
+  advanceConversation();
 }
 
 if (replayButton) {
@@ -379,6 +462,24 @@ if (replayButton) {
     playConversation();
   });
 }
+
+dialogueResumeButton?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  resumeConversation();
+});
+
+comicSection?.addEventListener("click", (event) => {
+  if (event.target instanceof Element && event.target.closest("#dialogue-resume-button, #replay-button")) {
+    return;
+  }
+
+  if (isConversationPaused) {
+    resumeConversation();
+    return;
+  }
+
+  pauseConversation();
+});
 
 inviteesList?.addEventListener("pointerdown", handleInviteePointerDown);
 inviteesList?.addEventListener("pointerup", handleInviteePointerUp);
