@@ -1,1 +1,2 @@
-script.js: comic tap now toggles pause/resume; resume button remains as visible cue
+index.html: resume cue copy updated for tap-anywhere instruction
+styles.css: resume cue gets constrained width and mobile bottom placement for visibility
