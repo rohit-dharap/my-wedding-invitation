@@ -3635,9 +3635,43 @@ body {
 }
 
 .venue-name-row .venue-title-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  min-height: 42px;
+  padding: 7px 15px 6px;
+  border: 1px solid rgba(119, 59, 123, 0.48);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(173, 116, 171, 0.09), transparent 68%);
+  box-shadow: 0 2px 7px rgba(97, 50, 95, 0.09);
+  color: var(--accent-deep);
+  text-decoration: none;
+}
+
+.venue-name-row .venue-title-link::before,
+.venue-name-row .venue-title-link::after {
+  position: absolute;
+  left: 50%;
+  padding-inline: 4px;
+  background: #fff9e8;
+  color: #834785;
+  content: "✿  ❀  ✿";
+  font-family: Georgia, serif;
+  font-size: 0.56rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.venue-name-row .venue-title-link::before {
+  top: -5px;
+  transform: translateX(-50%);
+}
+
+.venue-name-row .venue-title-link::after {
+  bottom: -5px;
+  transform: translateX(-50%) rotate(180deg);
 }
 
 .venue-name-row__akshada {
@@ -3711,12 +3745,15 @@ body {
 .venue-parking-tip {
   display: flex;
   align-items: flex-start;
-  gap: 5px;
-  margin-top: 5px;
-  color: #9a7045;
-  font-size: 0.68rem;
-  font-weight: 500;
+  gap: 4px;
+  width: calc(100% + 38px);
+  margin: 6px 0 0 -38px;
+  color: #9b7a5c;
+  font-size: 0.59rem;
+  font-style: italic;
+  font-weight: 400;
   line-height: 1.35;
+  text-align: left;
 }
 
 .info-card--venue .info-card__actions {
