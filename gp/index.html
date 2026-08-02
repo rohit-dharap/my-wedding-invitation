@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 400px; }
+        .password-container { display: flex; gap: 10px; align-items: center; margin: 10px 0; }
+        .password { font-size: 20px; font-weight: bold; color: #d9534f; background: #eee; padding: 10px; border-radius: 4px; word-break: break-all; flex-grow: 1; text-align: center; }
+        .btn { border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .copy-btn { background: #5cb85c; color: white; }
+        .copy-btn:hover { background: #4cae4c; }
+        .refresh-btn { background: #0275d8; color: white; width: 100%; margin-top: 10px; }
+        .refresh-btn:hover { background: #025aa5; }
+        ul { padding-left: 20px; font-size: 14px; color: #666; }
+        li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Current Password (IST)</h2>
+    <p>Copy the code below:</p>
+
+    <div class="password-container">
+        <div class="password" id="current-pass">Generating...</div>
+        <button class="btn copy-btn" id="copy-btn" onclick="copyPassword()">Copy</button>
+    </div>
+
+    <button class="btn refresh-btn" onclick="generatePasswords()">Refresh Time</button>
+
+    <h3>Recent Windows (Backup)</h3>
+    <ul id="backup-passwords"></ul>
+</div>
+
+<script>
+    var currentCode = "";
+
+    function generatePasswords() {
+        var now = new Date();
+        var formatter = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+
+        function getBase64ForOffset(minutesAgo) {
+            var checkTime = new Date(now.getTime() - (minutesAgo * 60 * 1000));
+            var parts = formatter.formatToParts(checkTime);
+            var hh = parts.find(p => p.type === 'hour').value;
+            var mm = parts.find(p => p.type === 'minute').value;
+            return {
+                time: hh + ":" + mm,
+                code: btoa("ISuck_" + hh + ":" + mm)
+            };
+        }
+
+        // 1. Current minute password
+        var current = getBase64ForOffset(0);
+        currentCode = current.code;
+        document.getElementById('current-pass').innerText = current.code;
+
+        // Reset copy button status if time refreshed
+        var copyBtn = document.getElementById('copy-btn');
+        copyBtn.innerText = "Copy";
+        copyBtn.style.background = "#5cb85c";
+
+        // 2. Render previous 3 minutes as backup list
+        var backupList = document.getElementById('backup-passwords');
+        backupList.innerHTML = "";
+        for (var i = 1; i <= 3; i++) {
+            var backup = getBase64ForOffset(i);
+            var li = document.createElement('li');
+            li.innerHTML = `<strong>${backup.time}:</strong> <code>${backup.code}</code>`;
+            backupList.appendChild(li);
+        }
+    }
+
+    function copyPassword() {
+        if (!currentCode) return;
+
+        // Use modern clipboard API
+        navigator.clipboard.writeText(currentCode).then(function() {
+            var copyBtn = document.getElementById('copy-btn');
+            copyBtn.innerText = "Copied!";
+            copyBtn.style.background = "#449d44"; // Darker green
+
+            // Revert back to original state after 2 seconds
+            setTimeout(function() {
+                copyBtn.innerText = "Copy";
+                copyBtn.style.background = "#5cb85c";
+            }, 2000);
+        }).catch(function(err) {
+            alert("Failed to copy automatically. Please copy it manually.");
+        });
+    }
+
+    // Run on page load
+    generatePasswords();
+</script>
+
+</body>
+</html>
